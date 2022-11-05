@@ -39,8 +39,17 @@ def get_villagers_by_species(filename, search_string="All"):
     """
 
     villagers = []
+    data = all_data(filename) # get the data
 
-    # TODO: replace this with your code
+    if search_string == 'All':
+        for row_num in range(len(data)):
+            villagers.append(data[row_num][0])
+    else:
+        for row_num in range(len(data)):
+            if data[row_num][1] == search_string:
+                villagers.append(data[row_num][0])
+            
+    villagers = list(set(villagers)) # convert list to set to get rid of duplicates and then back to a list
 
     return sorted(villagers)
 
@@ -55,7 +64,7 @@ def all_names_by_hobby(filename):
         - list[list[str]]: a list of lists containing names
     """
 
-    # TODO: replace this with your code
+
 
     return []
 
@@ -75,7 +84,6 @@ def all_data(filename):
 
     all_data = []
 
-    # TODO: replace this with your code
     with open(filename, newline='') as villagers_info:
         villagers_info_reader = csv.reader(villagers_info)
         #all_data = list(tuple(row) for row in villagers_info_reader)
@@ -125,4 +133,5 @@ def find_likeminded_villagers(filename, villager_name):
 
 
 # print(all_data('villagers.csv'))
-print(all_species('villagers.csv'))
+# print(all_species('villagers.csv'))
+print(get_villagers_by_species('villagers.csv', 'Sheep'))
